@@ -1,0 +1,25 @@
+create table medico(
+  codigoMedico integer PRIMARY KEY,
+  nome varchar(50),
+  dtNascimento date,
+  dtAdmissao date,
+  especialidade varchar(50)
+ );
+    
+ create table paciente(
+   codigoPaciente integer PRIMARY KEY,
+   nome varchar(50),
+   rua varchar(50),
+   cidade varchar(50),
+   dtNascimento date
+ );
+   
+ create table consulta(
+   codigoMedico integer REFERENCES Medico(codigoMedico),
+   codigoPaciente integer REFERENCES Paciente(codigoPaciente),
+   medicacao varchar(50),
+   dtConsulta date,
+   diagnostico varchar(50),
+   descricao varchar(50),
+	 primary key (codigoMedico,codigoPaciente )
+   );
