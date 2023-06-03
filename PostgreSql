@@ -1,0 +1,129 @@
+CREATE TABLE Empregado( 
+	idEmp INT  PRIMARY KEY, 
+	nmEmp VARCHAR(50), 
+	deEnd VARCHAR(50) );
+
+CREATE TABLE Departamento( 
+	idDepto INT  PRIMARY KEY, 
+	nmDepto VARCHAR(50) );
+	
+alter table Empregado  add column idDepto int;
+
+alter table Empregado add foreign key (idDepto) REFERENCES Departamento(idDepto);
+
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (111, 'Ciencia da Computacao');
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (222, 'Matematica');
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (333, 'Estatistica');
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (444, 'Letras');
+
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (1, 'Jose da Silva', 'Rua M', 111);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (2, 'Pedro Antonio', 'Rua N', 222);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (3, 'Marco João', 'Rua O', 333);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (4, 'Antonio Silva', 'Rua P', 444);
+
+SELECT * From Departamento;
+SELECT * From Empregado;
+
+SELECT * FROM Empregado
+ORDER BY 1;
+
+UPDATE Empregado
+SET nmEmp = 'Esther Souza'
+WHERE idEmp = 1;
+
+SELECT * FROM Empregado  
+
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (5, 'Felipe Costa', 'Rua 2', 111);
+
+SELECT * FROM Empregado 
+WHERE idEmp BETWEEN 1 AND 4; 
+
+
+SELECT nmEmp 
+FROM Empregado
+WHERE nmEmp BETWEEN 'A' AND 'F'; 
+
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (6, 'Fabio Carlos', 'Rua 2', 111);
+
+SELECT * FROM Empregado
+WHERE nmEmp LIKE '%tonio'
+
+DELETE FROM Empregado
+WHERE idEmp = 6;
+
+UPDATE Empregado
+SET idEmp = 6
+WHERE idEmp = 9;
+
+
+SELECT nmEmp FROM Empregado WHERE idEmp IN ('2', '4')
+
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (7, 'Flavio Sales', 'Rua 2', null);
+
+
+SELECT * FROM Empregado
+WHERE idDepto is null;
+
+
+
+ALTER TABLE Empregado ADD COLUMN salario numeric(5,2);
+UPDATE Empregado  SET salario = 900;
+
+
+SELECT idEmp as Identificador, nmEmp|| '- Esther Linda' as EmpregadosBonitos 
+FROM Empregado;
+
+
+SELECT idEmp, UPPER(SUBSTR(nmEmp, 0, STRPOS(nmEmp, ' '))) as primeironome FROM Empregado
+
+
+SELECT idEmp as Identificador,SUBSTR(nmEmp, 0, STRPOS(nmEmp, ' ')) as primeironome, salario, salario*1.6 as SalarioNovo
+FROM Empregado;
+
+SELECT nmEmp, (salario*1.6)||null as SalarioNovo
+FROM Empregado
+WHERE salario < 1000;
+
+SELECT  5+NULL
+FROM Empregado;
+
+SELECT idDepto, COUNT(idEmp) as QuantidadeEmp
+FROM Empregado
+WHERE idDepto is not null
+GROUP BY idDepto
+HAVING COUNT(idEmp) >2
+ORDER BY 1;
+
+UPDATE Empregado SET salario = 999 WHERE idEmp = 1;
+UPDATE Empregado SET salario = 950 WHERE idEmp = 2;
+UPDATE Empregado SET salario = 144 WHERE idEmp = 3;
+UPDATE Empregado SET salario = 700 WHERE idEmp = 4;
+UPDATE Empregado SET salario = 650 WHERE idEmp = 5;
+UPDATE Empregado SET salario = 400 WHERE idEmp = 6;
+
+select idDepto, avg(salario):: money as MediaSalario
+From Empregado
+WHERE idDepto is not null
+GROUP BY idDepto
+HAVING AVG(salario) < 900
+ORDER BY 2 DESC;
+
+SELECT idEmp, nmEmp, E.iddepto, D.iddepto, salario, nmdepto 
+FROM Empregado E
+INNER JOIN Departamento D on E.idDepto = D.idDepto
+
+
+
+;
+
