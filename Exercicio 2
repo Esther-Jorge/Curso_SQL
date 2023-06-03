@@ -1,0 +1,33 @@
+#criando tabela Empregado
+CREATE TABLE Empregado( 
+	idEmp INT NOT NULL PRIMARY KEY, 
+	nmEmp VARCHAR(50), 
+	deEnd VARCHAR(50) );
+
+#criando tabela Departamento
+CREATE TABLE Departamento( 
+	idDepto INT NOT NULL PRIMARY KEY, 
+	nmDepto VARCHAR(50) );
+	
+#criando uma coluna na tabela Empregado
+alter table Empregado  add column idDepto int;
+
+#criando uma coluna na tabela Empregado
+alter table Empregado add foreign key (idDepto) REFERENCES Departamento(idDepto);
+
+#inserindo dados 
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (111, 'Ciencia da Computacao');
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (222, 'Matematica');
+INSERT INTO Departamento (idDepto, nmDepto) 
+VALUES (333, 'Estatistica');
+
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (1, 'Jose da Silva', 'Rua M', 111);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (2, 'Pedro Antonio', 'Rua N', 222);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (3, 'Marco João', 'Rua O', 333);
+INSERT INTO Empregado(idEmp, nmEmp, deEnd, idDepto) 
+VALUES (4, 'Antonio Silva', 'Rua P', 444);
